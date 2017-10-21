@@ -1,0 +1,12 @@
+module load matlab
+matlab -nojvm -nosplash -noFigureWindows -nosoftwareopengl <<EOF
+
+    addpath('$PATH_SPM$')
+    addpath('$PATH_DCMSLURM$')
+
+	dcmslurm_estimate('$PATH_RAW$', '$PATH_PARSED$', '$PATH_OUTPUT$', ...
+		$SAVE_IN_PATH_PARSED$, $EM_STEPS_MAX$, ...
+		$MATRIX_A$, $MATRIX_C$, $MATRIX_HIDDEN$, ...
+		$VARIABLE$)
+
+EOF

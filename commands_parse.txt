@@ -1,0 +1,13 @@
+module load matlab
+matlab -nojvm -nosplash -noFigureWindows -nosoftwareopengl <<EOF
+
+    addpath('$PATH_SPM$')
+    addpath('$PATH_DCMSLURM$')
+    
+    path_raw_file = '$PATH_RAW_FILE$';
+    path_parsed = '$PATH_PARSED$';
+    labels = $LABELS$;
+
+    dcmslurm_parse(labels, path_raw_file, path_parsed)
+    
+EOF

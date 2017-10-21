@@ -1,0 +1,23 @@
+module load matlab
+matlab -nojvm -nosplash -noFigureWindows -nosoftwareopengl <<EOF
+
+    addpath('$PATH_SPM$')
+    addpath('$PATH_DCMSLURM$')
+
+    path_output = '$PATH_OUTPUT$';
+    labels = $LABELS$;
+    subjects = $SUBJECTS$;
+    pvalues = [0.1, 0.05, 0.01];
+
+    labels_dim = size(labels);
+    pvalues_dim = size(pvalues);
+
+    fprintf('\n')
+
+    for i = 1:labels_dim(2)
+    	for j = 1:pvalues_dim(2)
+		    dcmslurm_ttest(path_output, labels{i}, 1, subjects, pvalues(j))
+		end
+	end
+
+EOF

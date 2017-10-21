@@ -1,0 +1,33 @@
+#!/bin/bash 
+# commands that start with SBATCH contain commands used by SLURM for scheduling
+#################
+# set a job name  
+#SBATCH --job-name=$SCRIPT_NAME$
+#################  
+# a file for job output; you can check and log job progress
+#SBATCH --output=$PATH_LOG$
+#################
+# a file for errors from the job
+#SBATCH --error=$PATH_ERR$
+#################
+# time you think you need; default is one hour
+# in minutes in this case, hh:mm:ss
+#SBATCH --time=$TIME$
+#################
+# quality of service; think of it as job priority
+#SBATCH --qos=normal
+# We are submitting to the normal partition, there are several on sherlock:
+# normal, dev, gpu, owners, hns, bigmem (jobs requiring >64Gigs RAM) 
+#SBATCH -p $PARTITION$
+#################
+# number of nodes you are requesting
+#SBATCH --nodes=$NODES$
+#################
+# memory per node; default is 4000 MB per CPU
+#SBATCH --mem=$MEMORY$
+#################
+# Have SLURM send you an email when the job ends or fails
+#SBATCH --mail-type=END,FAIL # notifications for job done & fail
+#SBATCH --mail-user=$EMAIL$
+
+$COMMANDS$
